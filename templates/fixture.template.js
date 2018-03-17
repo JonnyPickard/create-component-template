@@ -7,5 +7,5 @@ export default {
   props: {
     theme: ${componentName}Theme
   }
-}
+};
 `;

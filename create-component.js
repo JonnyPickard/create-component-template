@@ -34,16 +34,11 @@ const { argv } = require('yargs');
 const prompt = require('prompt');
 const mkdirp = require('mkdirp-promise');
 
-const componentTemplate = require('./templates/component.template');
-const fixtureTemplate = require('./templates/fixture.template');
-const packageJsonTemplate = require('./templates/package.json.template');
-const scssTemplate = require('./templates/scss.template');
-const testTemplate = require('./templates/test.template');
-
 const getDependencies = require('./lib/get-dependencies');
 const getComponentName = require('./lib/get-component-name');
 const getComponentPath = require('./lib/get-component-path');
 const { infoMessage } = require('./lib/helpers');
+const mapConfig = require('./lib/parse-config');
 
 const writeFile = util.promisify(fs.writeFile);
 
@@ -61,41 +56,20 @@ module.exports = (async function createComponent() {
   const devDependencies = await getDependencies('dev');
   await prompt.stop();
 
+  const { folders, templates } = await mapConfig(componentName, componentPath);
+
   infoMessage(`Scaffolding Component: ${componentName}`);
 
   try {
-    await Promise.all([
-      mkdirp(`${componentPath}/${componentName}/__fixtures__`),
-      mkdirp(`${componentPath}/${componentName}/__tests__`),
-      mkdirp(`${componentPath}/${componentName}/__themes__`)
-    ]);
-    await Promise.all([
-      /** Component */
-      writeFile(
-        `${componentPath}/${componentName}/${componentName}.jsx`,
-        componentTemplate(componentName)
-      ),
-      /** Tests */
-      writeFile(
-        `${componentPath}/${componentName}/__tests__/${componentName}.test.js`,
-        testTemplate(componentName)
-      ),
-      /** Sass File */
-      writeFile(
-        `${componentPath}/${componentName}/__themes__/${componentName}.scss`,
-        scssTemplate(componentName)
-      ),
-      /** Fixture File */
-      writeFile(
-        `${componentPath}/${componentName}/__fixtures__/${componentName}.fixture.js`,
-        fixtureTemplate(componentName)
-      ),
-      /** package.json File */
-      writeFile(
-        `${componentPath}/${componentName}/package.json`,
-        packageJsonTemplate(componentName, dependencies, devDependencies)
+    await Promise.all(folders.map(folderName => mkdirp(folderName)));
+    await Promise.all(
+      templates.map(({ templatePath, filePath }) =>
+        writeFile(
+          filePath,
+          require(templatePath)(componentName, dependencies, devDependencies)
+        )
       )
-    ]);
+    );
   } catch (err) {
     console.error(chalk.red(err + '\n'));
     console.log(
