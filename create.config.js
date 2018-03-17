@@ -2,22 +2,27 @@ module.exports = {
   templatesDirectory: './templates',
   templates: [
     {
-      folder: '__fixtures__',
-      template: 'fixture.template.js'
+      folderName: '__fixtures__',
+      templateName: 'fixture.template.js',
+      extension: '.fixture.js'
     },
     {
-      folder: '__tests__',
-      template: 'test.template.js'
+      folderName: '__tests__',
+      templateName: 'test.template.js',
+      extension: '.test.js'
     },
     {
-      folder: '__themes__',
-      template: 'scss.template.js'
+      folderName: '__themes__',
+      templateName: 'scss.template.js',
+      extension: '.scss'
     },
     {
-      template: 'package.json.template.js'
+      templateName: 'package.json.template.js',
+      extension: '.json'
     },
     {
-      template: 'component.template.js'
+      templateName: 'component.template.js',
+      extension: '.jsx'
     }
   ]
 };

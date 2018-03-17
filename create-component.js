@@ -32,6 +32,7 @@ const util = require('util');
 const chalk = require('chalk');
 const { argv } = require('yargs');
 const prompt = require('prompt');
+const mkdirp = require('mkdirp-promise');
 
 const componentTemplate = require('./templates/component.template');
 const fixtureTemplate = require('./templates/fixture.template');
@@ -44,7 +45,6 @@ const getComponentName = require('./lib/get-component-name');
 const getComponentPath = require('./lib/get-component-path');
 const { infoMessage } = require('./lib/helpers');
 
-const mkdir = util.promisify(fs.mkdir);
 const writeFile = util.promisify(fs.writeFile);
 
 const defaultComponentName = argv.name || argv.n || '';
@@ -64,11 +64,10 @@ module.exports = (async function createComponent() {
   infoMessage(`Scaffolding Component: ${componentName}`);
 
   try {
-    await mkdir(`${componentPath}/${componentName}`);
     await Promise.all([
-      mkdir(`${componentPath}/${componentName}/__fixtures__`),
-      mkdir(`${componentPath}/${componentName}/__tests__`),
-      mkdir(`${componentPath}/${componentName}/__themes__`)
+      mkdirp(`${componentPath}/${componentName}/__fixtures__`),
+      mkdirp(`${componentPath}/${componentName}/__tests__`),
+      mkdirp(`${componentPath}/${componentName}/__themes__`)
     ]);
     await Promise.all([
       /** Component */
