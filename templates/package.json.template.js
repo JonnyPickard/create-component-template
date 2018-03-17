@@ -3,18 +3,14 @@ const defaultDependencies = {
   classnames: '^2.2.5'
 };
 
-module.exports = (componentName, dependencies, devDependencies) => {
+module.exports = (componentName, options) => {
   const dep = JSON.stringify(
-    { ...defaultDependencies, ...dependencies },
+    { ...defaultDependencies, ...options.dependencies },
     null,
     4
   );
 
-  const devDep = JSON.stringify(
-    { ...defaultDependencies, ...dependencies },
-    null,
-    4
-  );
+  const devDep = JSON.stringify({ ...options.devDependencies }, null, 4);
 
   return `\
 {

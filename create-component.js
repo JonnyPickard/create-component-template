@@ -29,59 +29,70 @@ j: ''        Components package.json
 
 const fs = require('fs');
 const util = require('util');
-const chalk = require('chalk');
 const { argv } = require('yargs');
 const prompt = require('prompt');
 const mkdirp = require('mkdirp-promise');
 
-const getDependencies = require('./lib/get-dependencies');
-const getComponentName = require('./lib/get-component-name');
-const getComponentPath = require('./lib/get-component-path');
-const { infoMessage } = require('./lib/helpers');
-const mapConfig = require('./lib/parse-config');
+const {
+  getDependencies,
+  getComponentName,
+  getComponentPath
+} = require('./lib/prompts');
+const { logInfo, logSuccess, logError } = require('./lib/utils/logger');
+const mapConfig = require('./lib/config/parse-config');
 
 const writeFile = util.promisify(fs.writeFile);
 
-const defaultComponentName = argv.name || argv.n || '';
-const defaultPath = argv.path || argv.p || '.';
+const configPath = argv.config || argv.c || './lib/config/default-config.js';
+let componentName = argv.name || argv.n || '';
+let componentPath = argv.path || argv.p || '.';
+const dependencies = argv.dependencies || argv.d;
+const options = {};
 
 prompt.message = '';
 prompt.delimiter = '';
 
 module.exports = (async function createComponent() {
   await prompt.start(); // All following function calls use prompt
-  const componentName = await getComponentName({ defaultComponentName });
-  const componentPath = await getComponentPath({ defaultPath });
-  const dependencies = await getDependencies();
-  const devDependencies = await getDependencies('dev');
+
+  if (!componentPath) {
+    componentPath = await getComponentPath({ componentPath });
+  }
+
+  if (!componentName) {
+    componentName = await getComponentName({ componentName });
+  }
+
+  if (dependencies) {
+    options.dependencies = await getDependencies();
+    options.devDependencies = await getDependencies('dev');
+  }
+
   await prompt.stop();
 
-  const { folders, templates } = await mapConfig(componentName, componentPath);
+  const { folders, templates } = await mapConfig(
+    configPath,
+    componentName,
+    componentPath
+  );
 
-  infoMessage(`Scaffolding Component: ${componentName}`);
+  logInfo(`Scaffolding Component: ${componentName}`);
 
   try {
     await Promise.all(folders.map(folderName => mkdirp(folderName)));
     await Promise.all(
       templates.map(({ templatePath, filePath }) =>
-        writeFile(
-          filePath,
-          require(templatePath)(componentName, dependencies, devDependencies)
-        )
+        writeFile(filePath, require(templatePath)(componentName, options))
       )
     );
   } catch (err) {
-    console.error(chalk.red(err + '\n'));
-    console.log(
-      chalk.red(
-        `Component ${componentName} could not be built! Please check the above error log.\n`
-      )
+    logError(err);
+    logError(
+      `Component ${componentName} could not be built! Please check the above error log.\n`
     );
     process.exit(1);
   }
-  console.log(
-    chalk.green(
-      `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
-    )
+  logSuccess(
+    `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
   );
 })();
