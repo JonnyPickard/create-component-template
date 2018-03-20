@@ -3,8 +3,12 @@
   "main": "./create-component.js",
   "name": "create-component",
   "version": "0.0.0",
+  "scripts": {
+    "test": "jest --watch"
+  },
   "dependencies": {
     "chalk": "1.1.3",
+    "jest": "^22.4.2",
     "mkdirp-promise": "^5.0.1",
     "pkg-dir": "^2.0.0",
     "prompt": "^1.0.0",
