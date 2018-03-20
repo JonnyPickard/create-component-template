@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/bin/yarn create-component
+  /usr/local/Cellar/node/9.7.1/bin/node /usr/local/bin/yarn test-coverage
 
 PATH: 
-  /Users/jonny/.rvm/gems/ruby-2.3.0/bin:/Users/jonny/.rvm/gems/ruby-2.3.0@global/bin:/Users/jonny/.rvm/rubies/ruby-2.3.0/bin:/bin:/usr/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jonny/.rvm/gems/ruby-2.3.0/bin:/Users/jonny/.rvm/gems/ruby-2.3.0@global/bin:/Users/jonny/.rvm/rubies/ruby-2.3.0/bin:/Users/jonny/.rvm/bin
+  /Users/jonny/.rvm/gems/ruby-2.3.0/bin:/Users/jonny/.rvm/gems/ruby-2.3.0@global/bin:/Users/jonny/.rvm/rubies/ruby-2.3.0/bin:/bin:/usr/bin:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/jonny/.rvm/bin
 
 Yarn version: 
   1.5.1
@@ -54,7 +54,7 @@ Lockfile:
   No lockfile
 
 Trace: 
-  Error: Command "create-component" not found.
+  Error: Command "test-coverage" not found.
       at new MessageError (/usr/local/lib/node_modules/yarn/lib/cli.js:186:110)
       at /usr/local/lib/node_modules/yarn/lib/cli.js:87307:17
       at Generator.next (<anonymous>)
