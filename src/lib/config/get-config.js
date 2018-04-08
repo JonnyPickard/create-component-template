@@ -40,7 +40,8 @@ const getConfig = async (rootDir, configPath) => {
     if (config) {
       return config;
     }
-  } catch (e) {
+  } catch (err) {
+    console.log('e', err);
     logError(`
       Config could not be loaded, please ensure config is correctly specified in the package.json or a seperate config file.`);
   }
@@ -72,7 +73,7 @@ const getConfigFromRootDir = rootDir => {
 
 const getConfigFromDefaultConfigPath = (rootDir, configPath) => {
   logInfo(`No config file found. Reverting to default templates.`);
-  return require(`${rootDir}/${configPath}`);
+  return require(path.join(rootDir, configPath));
 };
 
 module.exports = getConfig;

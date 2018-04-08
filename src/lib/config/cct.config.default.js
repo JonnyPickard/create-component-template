@@ -7,7 +7,7 @@ type templateObject = {
   fileName?: string
 };
 
-export type config = {
+type config = {
   templatesDirectory: string,
   templates: Array<templateObject>
 };
@@ -43,4 +43,4 @@ const defaultConfig: config = {
   ]
 };
 
-export default defaultConfig;
+module.exports = defaultConfig;

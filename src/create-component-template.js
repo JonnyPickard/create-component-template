@@ -42,6 +42,7 @@ const mapConfigWithTemplates = require('./lib/config/parse-config');
 const writeFile = util.promisify(fs.writeFile);
 
 module.exports = (async function createComponent() {
+  console.log('hello');
   const {
     configPath,
     componentName,
