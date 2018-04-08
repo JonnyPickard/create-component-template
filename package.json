@@ -1,7 +1,7 @@
 {
   "author": "Jonny Pickard",
-  "main": "./create-component.js",
-  "name": "create-component",
+  "main": "./create-component-template.js",
+  "name": "create-component-template",
   "version": "0.0.0",
   "scripts": {
     "test": "jest --watch"
@@ -28,5 +28,10 @@
     "Library",
     "Monorepo"
   ],
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel-preset-flow": "^6.23.0",
+    "babel-watch": "^2.0.7",
+    "flow-bin": "^0.69.0"
+  }
 }

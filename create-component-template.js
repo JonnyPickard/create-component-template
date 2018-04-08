@@ -27,7 +27,7 @@ i: ''        Index file for importing / exporting the component
 j: ''        Components package.json
  */
 
-process.argv[1] = 'create-component';
+process.argv[1] = 'create-component-template';
 
 const fs = require('fs');
 const util = require('util');
