@@ -3,13 +3,13 @@
   "main": "./dist/create-component-template.js",
   "name": "create-component-template",
   "version": "0.0.0",
-  "bin": "dist/create-component-template.js",
+  "bin": "./dist/create-component-template.js",
   "scripts": {
     "test": "jest --watch",
     "start": "npm run build && npm run start-dist",
     "start-dist": "node ./dist/create-component-template",
     "build": "babel ./src/ -d ./dist/ --all --pretty",
-    "pre-push": "npm run build"
+    "prepush": "npm run build"
   },
   "dependencies": {
     "chalk": "1.1.3",
