@@ -7,8 +7,8 @@
     "create-component": "dist/create-component-template.js"
   },
   "files": [
-    "./dist/*",
-    "./templates/*"
+    "dist",
+    "templates"
   ],
   "keywords": [
     "Create",
