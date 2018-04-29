@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Generates react components from templates",
   "main": "./dist/create-component-template.js",
+  "bin": "./dist/create-component-template.js",
   "files": [
     "./dist",
     "./templates"
