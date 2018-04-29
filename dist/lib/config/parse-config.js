@@ -1,24 +1,7 @@
 const pkgDir = require('pkg-dir');
 const path = require('path');
 
-const { logError } = require('../utils/logger');
-
-const getConfig = async (rootDir, configPath) => {
-  let config;
-
-  try {
-    const pkgJson = require(`${rootDir}/package.json`);
-    if (!pkgJson['create-component']) {
-      config = require(path.join(rootDir, configPath));
-    } else {
-      config = pkgJson['create-component'];
-    }
-    return config;
-  } catch (err) {
-    logError(`
-      Config could not be loaded, please ensure config is correctly specified in the package.json or a seperate config file.`);
-  }
-};
+const getConfig = require('./get-config');
 
 const mapTemplates = (configFile, rootDir, componentName, componentPath) =>
   configFile.templates.map(template => {

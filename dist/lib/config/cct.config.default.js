@@ -1,10 +1,14 @@
-module.exports = {
+// 
+
+
+
+const defaultConfig = {
   templatesDirectory: './templates',
   templates: [
     {
       folderName: '__fixtures__',
       templateName: 'fixture.template.js',
-      extension: '.fixture.js'
+      extension: '.fixture.js' // Required
     },
     {
       folderName: '__tests__',
@@ -28,3 +32,5 @@ module.exports = {
     }
   ]
 };
+
+module.exports = defaultConfig;
