@@ -17,7 +17,6 @@ const getRootDir = () => {
         .join('/')
     : packageDir;
 
-  console.log(`rootDir`, rootDir);
   return rootDir;
 };
 
@@ -25,8 +24,6 @@ const isNodeModule = () => {
   let parentDir = path.basename(
     splitPath.slice(0, splitPath.length - 1).join('/')
   );
-
-  console.log(`parentDir`, parentDir);
 
   return parentDir === 'node_modules';
 };
