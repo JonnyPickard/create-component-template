@@ -42,7 +42,7 @@
     "start": "npm run build && npm run start-dist",
     "start-dist": "node ./dist/create-component-template",
     "build": "babel ./src/ -d ./dist/ --all --pretty",
-    "prepush": "npm run build"
+    "precommit": "npm run build"
   },
   "repository": {
     "type": "git",

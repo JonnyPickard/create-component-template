@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 /*
 This is a React component generator script. It will generate the basic layout of a component for you.
 
