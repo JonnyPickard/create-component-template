@@ -40,7 +40,6 @@ const defaultConfig: config = {
       extension: '.json'
     },
     {
-      fileName: 'index.js', // to NOTE Defaults to ComponentName if not specified
       templateName: 'component.template.js',
       extension: '.jsx'
     }

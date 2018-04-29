@@ -19,7 +19,6 @@ const defaultConfig = {
     templateName: 'package.json.template.js',
     extension: '.json'
   }, {
-    fileName: 'index.js', // to NOTE Defaults to ComponentName if not specified
     templateName: 'component.template.js',
     extension: '.jsx'
   }]
