@@ -10,11 +10,16 @@ const splitPath = packageDir.split(path.sep);
  * @return {string} rootDir path
  */
 const getRootDir = () => {
-  return isNodeModule() ? packageDir.split('/').slice(0, splitPath.length - 2).join('/') : packageDir;
+  let rootDir = isNodeModule() ? packageDir.split('/').slice(0, splitPath.length - 2).join('/') : packageDir;
+
+  console.log(`rootDir`, rootDir);
+  return rootDir;
 };
 
 const isNodeModule = () => {
   let parentDir = path.basename(splitPath.slice(0, splitPath.length - 1).join('/'));
+
+  console.log(`parentDir`, parentDir);
 
   return parentDir === 'node_modules';
 };
