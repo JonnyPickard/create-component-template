@@ -1,5 +1,7 @@
 // @flow
 
+const { isNodeModule } = require('../utils/helpers');
+
 type templateObject = {
   templateName: string,
   extension: string,
@@ -13,7 +15,9 @@ type config = {
 };
 
 const defaultConfig: config = {
-  templatesDirectory: './templates',
+  templatesDirectory: isNodeModule()
+    ? './node_modules/create-component-template/templates'
+    : './templates',
   templates: [
     {
       folderName: '__fixtures__',

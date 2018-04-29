@@ -1,7 +1,7 @@
-const pkgDir = require('pkg-dir');
 const path = require('path');
 
 const getConfig = require('./get-config');
+const { getRootDir } = require('../utils/helpers');
 
 const mapTemplates = (configFile, rootDir, componentName, componentPath) =>
   configFile.templates.map(template => {
@@ -37,7 +37,8 @@ const mapConfigWithTemplates = async (
   componentName,
   componentPath
 ) => {
-  const rootDir = await pkgDir(__dirname);
+  const rootDir = getRootDir();
+
   const configFile = await getConfig(rootDir, configPath);
   const folders = mapFolders(configFile, rootDir, componentName, componentPath);
   const templates = mapTemplates(

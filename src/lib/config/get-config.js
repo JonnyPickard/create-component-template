@@ -71,9 +71,9 @@ const getConfigFromRootDir = rootDir => {
   } catch (err) {} // Silence error
 };
 
-const getConfigFromDefaultConfigPath = (rootDir, configPath) => {
+const getConfigFromDefaultConfigPath = (pkgDirectory, configPath) => {
   logInfo(`No config file found. Reverting to default templates.`);
-  return require(path.join(rootDir, configPath));
+  return require(path.join(pkgDirectory, configPath));
 };
 
 module.exports = getConfig;

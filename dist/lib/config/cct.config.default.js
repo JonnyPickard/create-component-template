@@ -1,5 +1,7 @@
+const { isNodeModule } = require('../utils/helpers');
+
 const defaultConfig = {
-  templatesDirectory: './templates',
+  templatesDirectory: isNodeModule() ? './node_modules/create-component-template/templates' : './templates',
   templates: [{
     folderName: '__fixtures__',
     templateName: 'fixture.template.js',
