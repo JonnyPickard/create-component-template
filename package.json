@@ -3,9 +3,13 @@
   "main": "./dist/create-component-template.js",
   "name": "create-component-template",
   "version": "0.0.0",
+  "bin" : { 
+    "create-component" : "./dist/create-component-template.js" 
+  },
   "scripts": {
     "test": "jest --watch",
-    "start": "flow-remove-types ./src/ -d ./dist/ --all --pretty && node ./dist/create-component-template"
+    "start": "flow-remove-types ./src/ -d ./dist/ --all --pretty && node ./dist/create-component-template",
+    "build": "flow-remove-types ./src/ -d ./dist/ --all --pretty"
   },
   "dependencies": {
     "chalk": "1.1.3",
