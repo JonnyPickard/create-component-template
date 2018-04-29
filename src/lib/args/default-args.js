@@ -1,11 +1,17 @@
 // @flow
 
+const { isNodeModule } = require('../utils/helpers');
+
+const defaultConfigPath = 'dist/lib/config/cct.config.default.js';
+
 const defaultArgs: {
   configPath: string,
   componentName: string,
   componentPath: string
 } = {
-  configPath: './dist/lib/config/cct.config.default.js',
+  configPath: isNodeModule()
+    ? './node_modules/create-component-template/' + defaultConfigPath
+    : './' + defaultConfigPath,
   componentName: '',
   componentPath: '.'
 };
