@@ -1,5 +1,3 @@
-// 
-
 const path = require('path');
 
 const { logError, logInfo } = require('../utils/logger');
@@ -47,10 +45,7 @@ const getConfig = async (rootDir, configPath) => {
   }
 };
 
-const getConfigFromProvidedConfigPath = (
-  rootDir,
-  configPath
-) => {
+const getConfigFromProvidedConfigPath = (rootDir, configPath) => {
   try {
     return require(path.join(rootDir, configPath));
   } catch (err) {

@@ -1,3 +1,6 @@
+#!/usr/bin/env node
+
+
 /*
 This is a React component generator script. It will generate the basic layout of a component for you.
 
@@ -41,7 +44,7 @@ const mapConfigWithTemplates = require('./lib/config/parse-config');
 
 const writeFile = util.promisify(fs.writeFile);
 
-module.exports = (async function createComponent() {
+module.exports = async function createComponent() {
   console.log('hello');
   const {
     configPath,
@@ -51,35 +54,20 @@ module.exports = (async function createComponent() {
     devDependencies
   } = await promptUserIfRequired(cliArgs);
 
-  const { folders, templates } = await mapConfigWithTemplates(
-    configPath,
-    componentName,
-    componentPath
-  );
+  const { folders, templates } = await mapConfigWithTemplates(configPath, componentName, componentPath);
 
   logInfo(`Scaffolding Component: ${componentName}`);
 
   try {
     await Promise.all(folders.map(folderName => mkdirp(folderName)));
-    await Promise.all(
-      templates.map(({ templatePath, filePath }) =>
-        writeFile(
-          filePath,
-          require(templatePath)(componentName, {
-            dependencies,
-            devDependencies
-          })
-        )
-      )
-    );
+    await Promise.all(templates.map(({ templatePath, filePath }) => writeFile(filePath, require(templatePath)(componentName, {
+      dependencies,
+      devDependencies
+    }))));
   } catch (err) {
     logError(err);
-    logError(
-      `Component ${componentName} could not be built! Please check the above error log.\n`
-    );
+    logError(`Component ${componentName} could not be built! Please check the above error log.\n`);
     process.exit(1);
   }
-  logSuccess(
-    `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
-  );
-})();
+  logSuccess(`Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`);
+}();

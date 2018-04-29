@@ -19,9 +19,14 @@ npm manifest:
     "main": "./dist/create-component-template.js",
     "name": "create-component-template",
     "version": "0.0.0",
+    "bin" : { 
+      "create-component" : "node ./dist/create-component-template.js" 
+    },
     "scripts": {
       "test": "jest --watch",
-      "start": "flow-remove-types ./src/ -d ./dist/ --all --pretty && node ./dist/create-component-template"
+      "start": "npm run build && npm run start-dist",
+      "start-dist": "node ./dist/create-component-template",
+      "build": "babel ./src/ -d ./dist/ --all --pretty"
     },
     "dependencies": {
       "chalk": "1.1.3",
@@ -49,8 +54,10 @@ npm manifest:
     "devDependencies": {
       "babel-preset-flow": "^6.23.0",
       "babel-watch": "^2.0.7",
+      "exit-hook": "^2.0.0",
       "flow-bin": "^0.69.0",
-      "flow-remove-types": "^1.2.3"
+      "flow-remove-types": "^1.2.3",
+      "rimraf": "^2.6.2"
     }
   }
 
@@ -4097,7 +4104,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c flow-remove-types ./src/ -d ./dist/ --all --pretty && node ./dist/create-component-template
+  Arguments: -c npm run build && npm run start-dist
   Directory: /Users/jonny/projects/personal-projects/npm-modules/create-component-template
   Output:
   
