@@ -3,9 +3,7 @@
   "main": "./dist/create-component-template.js",
   "name": "create-component-template",
   "version": "0.0.0",
-  "bin": {
-    "create-component": "node ./dist/create-component-template.js"
-  },
+  "bin": "dist/create-component-template.js",
   "scripts": {
     "test": "jest --watch",
     "start": "npm run build && npm run start-dist",
@@ -37,6 +35,7 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
     "babel-watch": "^2.0.7",
     "exit-hook": "^2.0.0",
