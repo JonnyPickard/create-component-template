@@ -1,7 +1,11 @@
+// @flow
+
 const chalk = require('chalk');
 const prompt = require('prompt');
 
-module.exports = function getComponentPath(options) {
+module.exports = function getComponentPath(
+  options: Object
+): Promise<string | Error> {
   return new Promise((resolve, reject) => {
     const { defaultPath } = options;
     prompt.get(

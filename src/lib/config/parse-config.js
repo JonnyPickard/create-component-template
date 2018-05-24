@@ -1,9 +1,16 @@
+// @flow
+
 const path = require('path');
 
 const getConfig = require('./get-config');
 const { getRootDir } = require('../utils/helpers');
 
-const mapTemplates = (configFile, rootDir, componentName, componentPath) =>
+const mapTemplates = (
+  configFile: Object,
+  rootDir: string,
+  componentName: string,
+  componentPath: string
+) =>
   configFile.templates.map(template => {
     const folderName = template.folderName || '';
 
@@ -23,7 +30,12 @@ const mapTemplates = (configFile, rootDir, componentName, componentPath) =>
     };
   });
 
-const mapFolders = (configFile, rootDir, componentName, componentPath) =>
+const mapFolders = (
+  configFile: Object,
+  rootDir: string,
+  componentName: string,
+  componentPath: string
+) =>
   configFile.templates
     .map(({ folderName }) => {
       if (folderName) {
@@ -33,9 +45,9 @@ const mapFolders = (configFile, rootDir, componentName, componentPath) =>
     .filter(folder => folder);
 
 const mapConfigWithTemplates = async (
-  configPath,
-  componentName,
-  componentPath
+  configPath: string,
+  componentName: string,
+  componentPath: string
 ) => {
   const rootDir = getRootDir();
 

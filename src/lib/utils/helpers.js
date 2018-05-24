@@ -1,3 +1,5 @@
+// @flow
+
 const path = require('path');
 const pkgDir = require('pkg-dir');
 
@@ -29,7 +31,7 @@ const isNodeModule = () => {
 };
 
 module.exports = {
-  capitalize: string => string.replace(/\b\w/g, l => l.toUpperCase()),
+  capitalize: (string: string) => string.replace(/\b\w/g, l => l.toUpperCase()),
   getRootDir,
   isNodeModule
 };
