@@ -1,6 +1,6 @@
 {
   "name": "create-component-template",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Generates react components from templates",
   "main": "dist/create-component-template.js",
   "bin": {
@@ -9,14 +9,6 @@
   "files": [
     "dist",
     "templates"
-  ],
-  "keywords": [
-    "Create",
-    "Generate",
-    "React",
-    "Component",
-    "Library",
-    "Monorepo"
   ],
   "cct.config": {
     "templatesDirectory": "./templates",
@@ -83,5 +75,19 @@
   "bugs": {
     "url": "https://github.com/JonnyPickard/create-component-template/issues"
   },
-  "homepage": "https://github.com/JonnyPickard/create-component-template#readme"
+  "homepage": "https://github.com/JonnyPickard/create-component-template#readme",
+  "keywords": [
+    "Create",
+    "Generate",
+    "Generator",
+    "React",
+    "Vue",
+    "Angular",
+    "Component",
+    "Library",
+    "Monorepo",
+    "Template",
+    "Templates",
+    "Scaffold"
+  ]
 }
