@@ -12,9 +12,9 @@ const splitPath = packageDir.split(path.sep);
 const getRootDir = () => {
   let rootDir = isNodeModule()
     ? packageDir
-        .split('/')
+        .split(path.sep)
         .slice(0, splitPath.length - 2)
-        .join('/')
+        .join(path.sep)
     : packageDir;
 
   return rootDir;
