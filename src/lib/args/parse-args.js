@@ -1,3 +1,5 @@
+// @flow
+
 const yargs = require('yargs');
 
 const { configPath, componentName, componentPath } = require('./default-args');

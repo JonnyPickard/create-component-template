@@ -1,3 +1,5 @@
+// @flow
+
 const chalk = require('chalk');
 const prompt = require('prompt');
 const semverRegex = require('semver-regex');
@@ -5,9 +7,15 @@ const semverRegex = require('semver-regex');
 /*
   Recursively calls get dependencies untill user says no to more.
  */
-module.exports = (dependencyType, dependencies) =>
+module.exports = (
+  dependencyType?: string,
+  dependencies?: Object
+): Promise<Object | Error> =>
   new Promise((resolve, reject) => {
-    const getDependencies = (dependencyType = 'prod', dependencies = {}) => {
+    const getDependencies = (
+      dependencyType: string = 'prod',
+      dependencies: Object = {}
+    ): Function => {
       return prompt.get(
         {
           properties: {
@@ -40,7 +48,7 @@ module.exports = (dependencyType, dependencies) =>
             }
           }
         },
-        (err, result) => {
+        (err: Error, result: Object) => {
           if (err) {
             reject(err);
           } else if (result.requireMore === 'y') {

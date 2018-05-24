@@ -1,10 +1,12 @@
+// @flow
+
 const prompt = require('prompt');
 
 const getComponentName = require('./get-component-name');
 const getComponentPath = require('./get-component-path');
 const getDependencies = require('./get-dependencies');
 
-module.exports = async function promptUserIfRequired(options) {
+module.exports = async function promptUserIfRequired(options: Object): Object {
   const { componentName, componentPath, dependenciesRequested } = options;
 
   prompt.message = '';

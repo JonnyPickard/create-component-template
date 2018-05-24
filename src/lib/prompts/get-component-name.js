@@ -1,9 +1,13 @@
+// @flow
+
 const chalk = require('chalk');
 const prompt = require('prompt');
 
 const { capitalize } = require('../utils/helpers');
 
-module.exports = function getComponentName(options) {
+module.exports = function getComponentName(
+  options: Object
+): Promise<string | Error> {
   return new Promise((resolve, reject) => {
     const { defaultComponentName } = options;
     prompt.get(

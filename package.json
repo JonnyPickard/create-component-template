@@ -20,7 +20,8 @@
   ],
   "cct.config": {
     "templatesDirectory": "./templates",
-    "templates": [{
+    "templates": [
+      {
         "folderName": "__fixtures__",
         "templateName": "fixture.template.js",
         "extension": ".fixture.js"
