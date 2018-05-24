@@ -18,6 +18,35 @@
     "Library",
     "Monorepo"
   ],
+  "cct.config": {
+    "templatesDirectory": "./templates",
+    "templates": [{
+        "folderName": "__fixtures__",
+        "templateName": "fixture.template.js",
+        "extension": ".fixture.js"
+      },
+      {
+        "folderName": "__tests__",
+        "templateName": "test.template.js",
+        "extension": ".test.js"
+      },
+      {
+        "folderName": "__themes__",
+        "templateName": "scss.template.js",
+        "extension": ".scss"
+      },
+      {
+        "fileName": "package.json",
+        "templateName": "package.json.template.js",
+        "extension": ".json"
+      },
+      {
+        "fileName": "index.js",
+        "templateName": "component.template.js",
+        "extension": ".jsx"
+      }
+    ]
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
@@ -42,7 +71,7 @@
     "start": "npm run build && npm run start-dist",
     "start-dist": "node ./dist/create-component-template",
     "build": "babel ./src/ -d ./dist/ --all --pretty",
-    "precommit": "npm run build"
+    "precommit": "npm run build && git add ."
   },
   "repository": {
     "type": "git",
