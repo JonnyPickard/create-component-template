@@ -1,3 +1,5 @@
+// @flow
+
 const path = require('path');
 const pkgDir = require('pkg-dir');
 
@@ -12,9 +14,9 @@ const splitPath = packageDir.split(path.sep);
 const getRootDir = () => {
   let rootDir = isNodeModule()
     ? packageDir
-        .split('/')
+        .split(path.sep)
         .slice(0, splitPath.length - 2)
-        .join('/')
+        .join(path.sep)
     : packageDir;
 
   return rootDir;
@@ -29,7 +31,7 @@ const isNodeModule = () => {
 };
 
 module.exports = {
-  capitalize: string => string.replace(/\b\w/g, l => l.toUpperCase()),
+  capitalize: (string: string) => string.replace(/\b\w/g, l => l.toUpperCase()),
   getRootDir,
   isNodeModule
 };

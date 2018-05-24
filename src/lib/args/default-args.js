@@ -2,7 +2,7 @@
 
 const { isNodeModule } = require('../utils/helpers');
 
-const defaultConfigPath = 'dist/lib/config/cct.config.default.js';
+const defaultConfigPath: string = 'dist/lib/config/cct.config.default.js';
 
 const defaultArgs: {
   configPath: string,

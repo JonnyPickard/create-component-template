@@ -11,7 +11,7 @@ const defaultArgs = require('../args/default-args.js');
   3 - check rootDir
   4 - get from default path
  */
-const getConfig = async (rootDir, configPath) => {
+const getConfig = async (rootDir: string, configPath: string) => {
   // Provided config
   if (configPath !== defaultArgs.configPath) {
     return getConfigFromProvidedConfigPath(rootDir, configPath);
@@ -59,19 +59,22 @@ const getConfigFromProvidedConfigPath = (
   }
 };
 
-const getConfigFromPackageJson = rootDir => {
+const getConfigFromPackageJson = (rootDir: string) => {
   try {
     return require(`${rootDir}/package.json`)['cct.config'];
   } catch (err) {} // Silence error
 };
 
-const getConfigFromRootDir = rootDir => {
+const getConfigFromRootDir = (rootDir: string) => {
   try {
     require(`${rootDir}/cct.config.js`);
   } catch (err) {} // Silence error
 };
 
-const getConfigFromDefaultConfigPath = (pkgDirectory, configPath) => {
+const getConfigFromDefaultConfigPath = (
+  pkgDirectory: string,
+  configPath: string
+) => {
   logInfo(`No config file found. Reverting to default templates.`);
   return require(path.join(pkgDirectory, configPath));
 };
