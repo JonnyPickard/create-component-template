@@ -2,6 +2,7 @@
 const path = require('path');
 
 const getConfig = require('./get-config');
+
 const { getRootDir } = require('../utils/helpers');
 
 const mapTemplates = (

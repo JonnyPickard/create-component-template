@@ -40,7 +40,6 @@ const getConfig = async (rootDir: string, configPath: string) => {
       return config;
     }
   } catch (err) {
-    console.log('e', err);
     logError(`
       Config could not be loaded, please ensure config is correctly specified in the package.json or a seperate config file.`);
   }

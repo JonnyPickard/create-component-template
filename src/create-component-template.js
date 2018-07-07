@@ -29,6 +29,7 @@ i: ''        Index file for importing / exporting the component
 j: ''        Components package.json
  */
 
+// TODO: Don't think this is needed?
 process.argv[1] = 'create-component-template';
 
 const fs = require('fs');
@@ -47,8 +48,6 @@ const writeFile = util.promisify(fs.writeFile);
   const { configPath } = cliArgs;
 
   const { componentName, componentPath } = await promptUserIfRequired(cliArgs);
-
-  console.log(`componentPath`, componentPath);
 
   const { folders, templates } = await mapConfigWithTemplates(
     configPath,

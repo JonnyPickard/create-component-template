@@ -1,23 +1,5 @@
-// @flow
-
-const { isNodeModule } = require('../utils/helpers');
-
-type templateObject = {
-  templateName: string,
-  extension: string,
-  folderName?: string,
-  fileName?: string
-};
-
-type config = {
-  templatesDirectory: string,
-  templates: Array<templateObject>
-};
-
-const defaultConfig: config = {
-  templatesDirectory: isNodeModule()
-    ? './node_modules/create-component-template/templates'
-    : './templates',
+const defaultConfig = {
+  templatesDirectory: './templates',
   templates: [
     {
       folderName: '__fixtures__',
