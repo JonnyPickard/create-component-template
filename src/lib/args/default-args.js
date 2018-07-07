@@ -12,8 +12,9 @@ const defaultArgs: {
   configPath: isNodeModule()
     ? './node_modules/create-component-template/' + defaultConfigPath
     : './' + defaultConfigPath,
+  // Nothing for these 2 by default so that they use the prompt
   componentName: '',
-  componentPath: '.'
+  componentPath: ''
 };
 
 module.exports = defaultArgs;

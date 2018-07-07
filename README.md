@@ -8,7 +8,9 @@ Originally made to generate React components but can be used as a generic code g
 
 # Installation
 
-`npm i -D create-component-template`
+```sh
+npm i -D create-component-template
+```
 
 # Usage
 
@@ -20,7 +22,7 @@ This can be placed anywhere in your directory and pointed to using the `cct.conf
 
 Example Template Directory:
 
-```
+```sh
 templates
 ├── component.template.js
 ├── fixture.template.js
@@ -33,7 +35,7 @@ Each file should be a function that takes a component name and returns an es6 te
 
 The component name should be injected with string interpolation where required. Like so:
 
-```
+```js
 module.exports = componentName => `\
 // @flow
 
@@ -83,7 +85,7 @@ Finally if none of these are found it will default to using the default template
 
 A config file should be structured like so:
 
-```
+```js
 module.exports = {
   templatesDirectory: 'config/templates',
   templates: [
@@ -110,7 +112,7 @@ module.exports = {
     {
       fileName: 'index.js',
       templateName: 'component.template.js',
-      extension: '.jsx'
+      extension: '.js'
     }
   ]
 };
@@ -130,7 +132,7 @@ module.exports = {
 
 > NOTE: Make sure to run using `create-component` e.g. `yarn create-component` or `node_modules/.bin/create-component` as this is whats specificed in the node_modules/.bin. `create-component-template` will not work.
 
-```
+```js
 create-component [command]
 
 Commands:
@@ -143,7 +145,6 @@ Options:
   --config, -c        Path to a config file
   --name, -n          Name of the component
   --path, -p          Path to create the component at
-  --dependencies, -d  If specified will enable dependencies prompt
   --help              Show help                                        [boolean]
 ```
 

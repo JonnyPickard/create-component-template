@@ -4,30 +4,30 @@ const prompt = require('prompt');
 
 const getComponentName = require('./get-component-name');
 const getComponentPath = require('./get-component-path');
-const getDependencies = require('./get-dependencies');
+const { logError } = require('../utils/logger.js');
 
 module.exports = async function promptUserIfRequired(options: Object): Object {
-  const { componentName, componentPath, dependenciesRequested } = options;
+  const { componentName, componentPath } = options;
 
   prompt.message = '';
   prompt.delimiter = '';
 
-  await prompt.start(); // All following function calls use prompt
+  try {
+    // All following function calls use prompt
+    await prompt.start();
 
-  if (!componentPath) {
-    options.componentPath = await getComponentPath({ componentPath });
+    if (!componentPath) {
+      options.componentPath = await getComponentPath({ componentPath });
+    }
+
+    if (!componentName) {
+      options.componentName = await getComponentName({ componentName });
+    }
+
+    await prompt.stop();
+  } catch (err) {
+    logError(err);
   }
-
-  if (!componentName) {
-    options.componentName = await getComponentName({ componentName });
-  }
-
-  if (dependenciesRequested) {
-    options.dependencies = await getDependencies();
-    options.devDependencies = await getDependencies('dev');
-  }
-
-  await prompt.stop();
 
   return options;
 };

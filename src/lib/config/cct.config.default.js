@@ -41,7 +41,7 @@ const defaultConfig: config = {
     },
     {
       templateName: 'component.template.js',
-      extension: '.jsx'
+      extension: '.js'
     }
   ]
 };

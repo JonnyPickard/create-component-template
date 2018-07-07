@@ -8,7 +8,7 @@ For ease of use this should run via the package.json scripts section.
 This will output the resulting folder structure:
 
 a)  ComponentName
-b)    ├── ComponentName.jsx
+b)    ├── ComponentName.js
 c)    ├── __fixtures__
 d)    │   └── ComponentName.fixture.js
 e)    ├── __tests__
@@ -47,9 +47,7 @@ module.exports = (async function createComponent() {
   const {
     configPath,
     componentName,
-    componentPath,
-    dependencies,
-    devDependencies
+    componentPath
   } = await promptUserIfRequired(cliArgs);
 
   const { folders, templates } = await mapConfigWithTemplates(
@@ -64,13 +62,7 @@ module.exports = (async function createComponent() {
     await Promise.all(folders.map(folderName => mkdirp(folderName)));
     await Promise.all(
       templates.map(({ templatePath, filePath }) =>
-        writeFile(
-          filePath,
-          require(templatePath)(componentName, {
-            dependencies,
-            devDependencies
-          })
-        )
+        writeFile(filePath, require(templatePath)(componentName))
       )
     );
   } catch (err) {

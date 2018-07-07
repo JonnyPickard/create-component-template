@@ -3,6 +3,13 @@
   "version": "1.0.3",
   "description": "Generates react components from templates",
   "main": "dist/create-component-template.js",
+  "scripts": {
+    "test": "jest --watch",
+    "start": "npm run build && npm run start-dist",
+    "start-dist": "node ./dist/create-component-template",
+    "build": "babel ./src/ -d ./dist/ --all --pretty",
+    "precommit": "npm run build && git add ."
+  },
   "bin": {
     "create-component": "dist/create-component-template.js"
   },
@@ -10,36 +17,6 @@
     "dist",
     "templates"
   ],
-  "cct.config": {
-    "templatesDirectory": "./templates",
-    "templates": [
-      {
-        "folderName": "__fixtures__",
-        "templateName": "fixture.template.js",
-        "extension": ".fixture.js"
-      },
-      {
-        "folderName": "__tests__",
-        "templateName": "test.template.js",
-        "extension": ".test.js"
-      },
-      {
-        "folderName": "__themes__",
-        "templateName": "scss.template.js",
-        "extension": ".scss"
-      },
-      {
-        "fileName": "package.json",
-        "templateName": "package.json.template.js",
-        "extension": ".json"
-      },
-      {
-        "fileName": "index.js",
-        "templateName": "component.template.js",
-        "extension": ".jsx"
-      }
-    ]
-  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-flow": "^6.23.0",
@@ -58,13 +35,6 @@
     "prompt": "^1.0.0",
     "semver-regex": "^1.0.0",
     "yargs": "^11.0.0"
-  },
-  "scripts": {
-    "test": "jest --watch",
-    "start": "npm run build && npm run start-dist",
-    "start-dist": "node ./dist/create-component-template",
-    "build": "babel ./src/ -d ./dist/ --all --pretty",
-    "precommit": "npm run build && git add ."
   },
   "repository": {
     "type": "git",
