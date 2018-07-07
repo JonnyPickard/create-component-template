@@ -36,7 +36,7 @@ const mkdirp = require('mkdirp-promise');
 const { logInfo, logSuccess, logError } = require('./lib/utils/logger');
 
 const cliArgs = require('./lib/args/parser');
-const promptUser = require('./lib/user-prompt');
+const promptUser = require('./lib/user-prompt/prompt');
 const mapConfigWithTemplates = require('./lib/config/parser');
 
 const writeFile = util.promisify(fs.writeFile);
@@ -44,17 +44,18 @@ const writeFile = util.promisify(fs.writeFile);
 (async function createComponent() {
   const { configPath } = cliArgs;
   const { componentName, componentPath } = await promptUser(cliArgs);
-
   const { folders, templates } = await mapConfigWithTemplates(
     configPath,
     componentName,
     componentPath
   );
 
-  logInfo(`Scaffolding Component: ${componentName}`);
+  logInfo(`Generating Component: ${componentName}`);
 
   try {
+    // Make all directories
     await Promise.all(folders.map(folderName => mkdirp(folderName)));
+    // Make all files
     await Promise.all(
       templates.map(({ templatePath, filePath }) =>
         writeFile(filePath, require(templatePath)(componentName))

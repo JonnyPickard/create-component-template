@@ -40,7 +40,9 @@ const promptUser = async (options: Object): Object => {
   } catch (err) {
     logError(err);
   }
-  return answers;
+
+  // default options + override with answers
+  return { ...options, ...answers };
 };
 
 module.exports = promptUser;

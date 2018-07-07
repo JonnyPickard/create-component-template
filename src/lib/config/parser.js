@@ -3,14 +3,17 @@ const path = require('path');
 
 const getConfig = require('./importer');
 
-const { getRootDir } = require('../utils/helpers');
+const { getAppRootDir } = require('../utils/helpers');
 
 const mapTemplates = (
   configFile: Object,
   rootDir: string,
   componentName: string,
   componentPath: string
-) =>
+): Array<{
+  [filePath: string]: string,
+  [templatePath: string]: string
+}> =>
   configFile.templates.map(template => {
     const folderName = template.folderName || '';
 
@@ -35,7 +38,7 @@ const mapFolders = (
   rootDir: string,
   componentName: string,
   componentPath: string
-) => {
+): Array<{ [folder_path: string]: string }> => {
   return configFile.templates
     .map(({ folderName }) => {
       if (folderName) {
@@ -49,9 +52,14 @@ const mapConfigWithTemplates = async (
   configPath: string,
   componentName: string,
   componentPath: string
-) => {
-  const rootDir = getRootDir();
-
+): {
+  templates: Array<{
+    [filePath: string]: string,
+    [templatePath: string]: string
+  }>,
+  folders: Array<{ [folder_path: string]: string }>
+} => {
+  const rootDir = getAppRootDir();
   const configFile = await getConfig(rootDir, configPath);
   const folders = mapFolders(configFile, rootDir, componentName, componentPath);
   const templates = mapTemplates(
@@ -62,8 +70,8 @@ const mapConfigWithTemplates = async (
   );
 
   return {
-    folders,
-    templates
+    templates,
+    folders
   };
 };
 
