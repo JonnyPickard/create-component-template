@@ -15,4 +15,6 @@ const defaultArgs: {
   componentPath: ''
 };
 
+console.log(`defaultArgs`, defaultArgs);
+
 module.exports = defaultArgs;
