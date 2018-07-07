@@ -38,17 +38,15 @@ const mkdirp = require('mkdirp-promise');
 const { logInfo, logSuccess, logError } = require('./lib/utils/logger');
 
 const cliArgs = require('./lib/args/parse-args');
-const promptUserIfRequired = require('./lib/prompts');
+const promptUserIfRequired = require('./lib/user-prompt');
 const mapConfigWithTemplates = require('./lib/config/parse-config');
 
 const writeFile = util.promisify(fs.writeFile);
 
-module.exports = (async function createComponent() {
-  const {
-    configPath,
-    componentName,
-    componentPath
-  } = await promptUserIfRequired(cliArgs);
+(async function createComponent() {
+  const { configPath } = cliArgs;
+
+  const { componentName, componentPath } = await promptUserIfRequired(cliArgs);
 
   const { folders, templates } = await mapConfigWithTemplates(
     configPath,
