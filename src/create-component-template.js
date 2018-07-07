@@ -42,17 +42,24 @@ const mapConfigWithTemplates = require('./lib/config/parser');
 const writeFile = util.promisify(fs.writeFile);
 
 (async function createComponent() {
-  const { configPath } = cliArgs;
-  const { componentName, componentPath } = await promptUser(cliArgs);
-  const { folders, templates } = await mapConfigWithTemplates(
-    configPath,
-    componentName,
-    componentPath
-  );
-
-  logInfo(`Generating Component: ${componentName}`);
+  let componentName;
+  let componentPath;
 
   try {
+    const { configPath } = cliArgs;
+
+    const userResponse = await promptUser(cliArgs);
+
+    componentName = userResponse.componentName;
+    componentPath = userResponse.componentPath;
+
+    const { folders, templates } = await mapConfigWithTemplates(
+      configPath,
+      componentName,
+      componentPath
+    );
+
+    logInfo(`Generating Component: ${componentName}`);
     // Make all directories
     await Promise.all(folders.map(folderName => mkdirp(folderName)));
     // Make all files
@@ -66,9 +73,9 @@ const writeFile = util.promisify(fs.writeFile);
     logError(
       `Component ${componentName} could not be built! Please check the above error log.\n`
     );
-    process.exit(1);
+  } finally {
+    logSuccess(
+      `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
+    );
   }
-  logSuccess(
-    `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
-  );
 })();

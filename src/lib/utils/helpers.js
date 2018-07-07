@@ -16,7 +16,7 @@ const getModuleRootDir = () =>
 const getAppRootDir = () => pkgDir.sync(__dirname);
 
 module.exports = {
-  capitalize: (string: string) => string.replace(/\b\w/g, l => l.toUpperCase()),
+  capitalize: string => string.replace(/\b\w/g, l => l.toUpperCase()),
   getModuleRootDir,
   getAppRootDir
 };
