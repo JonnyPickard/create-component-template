@@ -1,13 +1,13 @@
 {
   "name": "create-component-template",
-  "version": "1.0.4-alpha-0.4",
+  "version": "1.0.4-alpha-0.8",
   "description": "Generates react components from templates",
   "main": "dist/create-component-template.js",
   "scripts": {
     "test": "jest --watch",
     "start": "npm run build && npm run start-dist",
     "start-dist": "node ./dist/create-component-template",
-    "nodemon-build": "nodemon -w ./src -d 500 --exec npm run build",
+    "nodemon-build": "nodemon -w ./src --exec npm run build",
     "build": "babel ./src/ -d ./dist/ --all --pretty",
     "precommit": "npm run build && git add ."
   },
@@ -63,5 +63,33 @@
     "Template",
     "Templates",
     "Scaffold"
-  ]
+  ],
+  "cct.config": {
+    "templatesDirectory": "./templates",
+    "templates": [{
+        "folderName": "__fixtures__",
+        "templateName": "fixture.template.js",
+        "extension": ".fixture.js"
+      },
+      {
+        "folderName": "__tests__",
+        "templateName": "test.template.js",
+        "extension": ".test.js"
+      },
+      {
+        "folderName": "__themes__",
+        "templateName": "scss.template.js",
+        "extension": ".scss"
+      },
+      {
+        "fileName": "package.json",
+        "templateName": "package.json.template.js",
+        "extension": ".json"
+      },
+      {
+        "templateName": "component.template.js",
+        "extension": ".js"
+      }
+    ]
+  }
 }

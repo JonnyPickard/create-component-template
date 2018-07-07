@@ -29,25 +29,21 @@ i: ''        Index file for importing / exporting the component
 j: ''        Components package.json
  */
 
-// TODO: Don't think this is needed?
-process.argv[1] = 'create-component-template';
-
 const fs = require('fs');
 const util = require('util');
 const mkdirp = require('mkdirp-promise');
 
 const { logInfo, logSuccess, logError } = require('./lib/utils/logger');
 
-const cliArgs = require('./lib/args/parse-args');
-const promptUserIfRequired = require('./lib/user-prompt');
-const mapConfigWithTemplates = require('./lib/config/parse-config');
+const cliArgs = require('./lib/args/parser');
+const promptUser = require('./lib/user-prompt');
+const mapConfigWithTemplates = require('./lib/config/parser');
 
 const writeFile = util.promisify(fs.writeFile);
 
 (async function createComponent() {
   const { configPath } = cliArgs;
-
-  const { componentName, componentPath } = await promptUserIfRequired(cliArgs);
+  const { componentName, componentPath } = await promptUser(cliArgs);
 
   const { folders, templates } = await mapConfigWithTemplates(
     configPath,

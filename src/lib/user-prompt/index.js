@@ -3,15 +3,18 @@
 const { logError } = require('../utils/logger.js');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
-const { capitalize } = require('../utils/helpers');
+
+const defaultArgs = require('../args/default');
 
 const createQuestions = options => {
   const questions = [
     {
       type: 'input',
       name: 'componentName',
-      message: chalk.magenta('Please enter a component name capitalized'),
-      when: () => !options.componentName
+      message: chalk.magenta('Please enter a component name'),
+      when: () => !options.componentName,
+      validate: compName =>
+        compName ? true : 'must be longer than 0 characters'
     },
     {
       type: 'input',
@@ -19,24 +22,25 @@ const createQuestions = options => {
       message: chalk.magenta(
         `Please enter a folder path for the new component`
       ),
-      when: () => !options.componentPath
+      when: () => !options.componentPath,
+      default: defaultArgs.componentPath
     }
   ];
 
   return questions;
 };
 
-const promptUserIfRequired = async (options: Object): Object => {
+const promptUser = async (options: Object): Object => {
   const questions = createQuestions(options);
 
-  const answers = await inquirer.prompt(questions);
+  let answers;
 
-  const customizedOptions = {
-    ...options,
-    ...answers
-  };
-
-  return customizedOptions;
+  try {
+    answers = await inquirer.prompt(questions);
+  } catch (err) {
+    logError(err);
+  }
+  return answers;
 };
 
-module.exports = promptUserIfRequired;
+module.exports = promptUser;

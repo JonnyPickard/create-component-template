@@ -1,7 +1,7 @@
 // @flow
 const path = require('path');
 
-const getConfig = require('./get-config');
+const getConfig = require('./importer');
 
 const { getRootDir } = require('../utils/helpers');
 

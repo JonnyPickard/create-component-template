@@ -2,18 +2,22 @@
 const path = require('path');
 
 const { logError, logInfo } = require('../utils/logger');
-const defaultArgs = require('../args/default-args.js');
+const defaultArgs = require('../args/default.js');
+
+const pkgDir = require('pkg-dir');
 
 /*
   1 - check for specified config location
   2 - check package.json
-  3 - check rootDir
+  3 - check rootDir TODO: Swap these
   4 - get from default path
  */
+
+// CONFIG PATH IS THE PATH THE USER PASSES IN
 const getConfig = async (rootDir: string, configPath: string) => {
   // Provided config
-  if (configPath !== defaultArgs.configPath) {
-    return getConfigFromProvidedConfigPath(rootDir, configPath);
+  if (configPath) {
+    return getConfigFromProvidedConfigPath(pkgDir.sync(__dirname), configPath);
   }
 
   let config;
@@ -22,6 +26,7 @@ const getConfig = async (rootDir: string, configPath: string) => {
     // Package Json
     // No Throw but move next
     config = getConfigFromPackageJson(rootDir);
+
     if (config) {
       return config;
     }
@@ -29,13 +34,15 @@ const getConfig = async (rootDir: string, configPath: string) => {
     // Root Dir
     // No Throw but move next
     config = getConfigFromRootDir(rootDir);
+
     if (config) {
       return config;
     }
 
     // Default Config
     // Throw
-    config = getConfigFromDefaultConfigPath(rootDir, configPath);
+    config = getConfigFromDefaultConfigPath(rootDir, defaultArgs.configPath);
+
     if (config) {
       return config;
     }
@@ -46,11 +53,11 @@ const getConfig = async (rootDir: string, configPath: string) => {
 };
 
 const getConfigFromProvidedConfigPath = (
-  rootDir: string,
+  pkgDir: string,
   configPath: string
 ): Object | void => {
   try {
-    return require(path.join(rootDir, configPath));
+    return require(path.join(pkgDir, configPath));
   } catch (err) {
     logError(`
       Config could not be loaded, please ensure provided config path is correct.`);
@@ -65,16 +72,16 @@ const getConfigFromPackageJson = (rootDir: string) => {
 
 const getConfigFromRootDir = (rootDir: string) => {
   try {
-    require(`${rootDir}/cct.config.js`);
+    require(`${rootDir}/cct.config.default.js`);
   } catch (err) {} // Silence error
 };
 
 const getConfigFromDefaultConfigPath = (
-  pkgDirectory: string,
+  rootDir: string,
   configPath: string
 ) => {
   logInfo(`No config file found. Reverting to default templates.`);
-  return require(path.join(pkgDirectory, configPath));
+  return require(path.join(rootDir, configPath));
 };
 
 module.exports = getConfig;
