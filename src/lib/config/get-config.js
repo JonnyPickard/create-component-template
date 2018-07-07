@@ -1,5 +1,4 @@
 // @flow
-
 const path = require('path');
 
 const { logError, logInfo } = require('../utils/logger');

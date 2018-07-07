@@ -1,5 +1,4 @@
 // @flow
-
 const path = require('path');
 
 const getConfig = require('./get-config');
@@ -35,14 +34,15 @@ const mapFolders = (
   rootDir: string,
   componentName: string,
   componentPath: string
-) =>
-  configFile.templates
+) => {
+  return configFile.templates
     .map(({ folderName }) => {
       if (folderName) {
         return path.join(rootDir, componentPath, componentName, folderName);
       }
     })
     .filter(folder => folder);
+};
 
 const mapConfigWithTemplates = async (
   configPath: string,

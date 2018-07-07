@@ -48,6 +48,8 @@ const writeFile = util.promisify(fs.writeFile);
 
   const { componentName, componentPath } = await promptUserIfRequired(cliArgs);
 
+  console.log(`componentPath`, componentPath);
+
   const { folders, templates } = await mapConfigWithTemplates(
     configPath,
     componentName,

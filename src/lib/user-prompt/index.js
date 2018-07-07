@@ -26,12 +26,17 @@ const createQuestions = options => {
   return questions;
 };
 
-// capitalize(result.componentName);
-
-module.exports = async function promptUserIfRequired(options: Object): Object {
+const promptUserIfRequired = async (options: Object): Object => {
   const questions = createQuestions(options);
 
   const answers = await inquirer.prompt(questions);
 
-  return answers;
+  const customizedOptions = {
+    ...options,
+    ...answers
+  };
+
+  return customizedOptions;
 };
+
+module.exports = promptUserIfRequired;
