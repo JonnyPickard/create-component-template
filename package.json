@@ -1,6 +1,6 @@
 {
   "name": "create-component-template",
-  "version": "1.0.4-alpha-0.28",
+  "version": "2.0.0",
   "description": "Generates react components from templates",
   "bin": {
     "create-component": "dist/create-component-template.js"
@@ -14,7 +14,7 @@
     "UTILS": "",
     "bump-patch-version": "babel-node scripts/bump-version",
     "NPM HOOKS": "",
-    "prepublishOnly": "npm run bump-patch-version && npm run build",
+    "prepublishOnly": "npm run build",
     "postpublish": "rm -rf ./dist"
   },
   "files": [

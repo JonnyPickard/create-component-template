@@ -2,12 +2,11 @@
  * Current only bumps minor patch version but could be tweaked
  */
 const fs = require('fs');
+const path = require('path');
 const chalk = require('chalk');
 
-const moduleRootDir = '../';
-const packageJsonPath = `${moduleRootDir}/package.json`;
+const packageJson = require('../package.json');
 
-const packageJson = require(`${moduleRootDir}/package.json`);
 const versionEntry = packageJson.version;
 
 // gets last 2 digits
@@ -33,7 +32,7 @@ const bumpedVersionPackageJson = {
 };
 
 fs.writeFileSync(
-  packageJsonPath,
+  '../package.json',
   JSON.stringify(bumpedVersionPackageJson, null, 2)
 );
 
