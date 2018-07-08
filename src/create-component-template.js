@@ -73,6 +73,7 @@ const writeFile = util.promisify(fs.writeFile);
     logError(
       `Component ${componentName} could not be built! Please check the above error log.\n`
     );
+    process.exit(1);
   }
   logSuccess(
     `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`

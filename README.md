@@ -78,8 +78,8 @@ The config file tells `create-component-template` where your templates are store
 `create-component-template` will look for the config file in the following places in this order:
 
 1. the location provided using the cli option `-c` or `--config` and *any* given filename
-2. inside of the `package.json` under `cct.config`
-3. in the root dir of the project under `cct.config`
+2. in the root dir of the project under `cct.config`
+3. inside of the `package.json` under `cct.config`
 
 Finally if none of these are found it will default to using the default templates.
 

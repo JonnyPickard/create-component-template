@@ -69,7 +69,6 @@ const mapConfigWithTemplates = async (
   folderPaths: folderPathsArray
 }> => {
   const appRootDir = getAppRootDir();
-  console.log(`appRootDir`, appRootDir);
   const configFile = await getConfig(appRootDir, configPath);
   const folderPaths = mapFolderPaths(
     configFile,

@@ -7,26 +7,17 @@ const { getModuleRootDir } = require('../utils/helpers');
 
 /*
   1 - check for specified config location
-  2 - check package.json
-  3 - check appRootDir TODO: Swap these
+  2 - check appRootDir
+  3 - check package.json
   4 - get from default path
  */
-
-// CONFIG PATH IS THE PATH THE USER PASSES IN
-const getConfig = async (appRootDir: string, configPath: string) => {
-  // Provided config
-  if (configPath) {
-    return getConfigFromProvidedConfigPath(appRootDir, configPath);
-  }
-
+const getConfig = async (appRootDir: string, configPath: string): ?Object => {
   let config;
 
   try {
-    // Package Json
-    // No Throw but move next
-    config = getConfigFromPackageJson(appRootDir);
-    if (config) {
-      return config;
+    if (configPath) {
+      // Provided config
+      return getConfigFromProvidedConfigPath(appRootDir, configPath);
     }
 
     // Root Dir
@@ -36,52 +27,49 @@ const getConfig = async (appRootDir: string, configPath: string) => {
       return config;
     }
 
+    // Package Json
+    // No Throw but move next
+    config = getConfigFromPackageJson(appRootDir);
+    if (config) {
+      return config;
+    }
+
     // Default Config
     config = getConfigFromDefaultConfigPath(
       getModuleRootDir(),
       defaultArgs.configPath
     );
+
     if (config) {
       return config;
     }
   } catch (err) {
     logError(`${err}
-      Config could not be loaded, please ensure config is correctly specified in the package.json or a seperate config file.`);
+      cct.config could not be loaded. please see the README for details on setting cct.config`);
   }
 };
 
 const getConfigFromProvidedConfigPath = (
   appRootDir: string,
   configPath: string
-): Object | void => {
+): ?Object => {
   try {
     return require(path.join(appRootDir, configPath));
   } catch (err) {
-    logError(`${err}
-      Config could not be loaded, please ensure provided config path is correct.`);
+    throw new Error('cct.config at provided config path not found');
   }
 };
 
-const getConfigFromPackageJson = (appRootDir: string): Object => {
-  try {
-    return require(`${appRootDir}/package.json`)['cct.config'];
-  } catch (err) {
-    logError(err);
-  } // Silence error
-};
+const getConfigFromPackageJson = (appRootDir: string): ?Object =>
+  require(`${appRootDir}/package.json`)['cct.config'];
 
-const getConfigFromRootDir = (appRootDir: string) => {
-  try {
-    require(`${appRootDir}/cct.config.default.js`);
-  } catch (err) {
-    logError(err);
-  } // Silence error
-};
+const getConfigFromRootDir = (appRootDir: string): ?Object =>
+  require(path.join(appRootDir, 'cct.config.js'));
 
 const getConfigFromDefaultConfigPath = (
   moduleRootDir: string,
   configPath: string
-) => {
+): ?Object => {
   logInfo(`No config file found. Reverting to default templates.`);
 
   return require(path.join(moduleRootDir, configPath));

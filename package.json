@@ -1,6 +1,6 @@
 {
   "name": "create-component-template",
-  "version": "1.0.4-alpha-0.20",
+  "version": "1.0.4-alpha-0.27",
   "description": "Generates react components from templates",
   "bin": {
     "create-component": "dist/create-component-template.js"
@@ -24,6 +24,7 @@
   ],
   "dependencies": {
     "chalk": "2.4.1",
+    "find-parent-dir-from-bin": "^1.0.0-alpha-5",
     "find-up": "^3.0.0",
     "inquirer": "^6.0.0",
     "mkdirp-promise": "^5.0.1",

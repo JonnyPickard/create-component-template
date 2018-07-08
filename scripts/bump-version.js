@@ -3,7 +3,7 @@
  */
 
 const fs = require('fs');
-const { getModuleRootDir } = require('../src/lib/utils/pathing.js');
+const { getModuleRootDir } = require('../src/lib/utils/helpers.js');
 const chalk = require('chalk');
 
 const moduleRootDir = getModuleRootDir();
@@ -40,7 +40,6 @@ fs.writeFileSync(
 );
 
 console.log(
-  `chalk.green()`,
   chalk.green(
     `Version successfully bumped from ${currentVersionPatchNumber} to ${currentVersionPatchNumber +
       1}`
