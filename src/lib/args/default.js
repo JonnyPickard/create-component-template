@@ -1,3 +1,6 @@
+const path = require('path');
+const { LIB_DIR_PARENT = 'src' } = process.env;
+
 // @flow
 const defaultArgs: {
   configPath: string,
@@ -6,7 +9,7 @@ const defaultArgs: {
 } = {
   componentName: '',
   componentPath: 'src/components',
-  configPath: 'cct.config.default.js' // relative
+  configPath: path.join(LIB_DIR_PARENT, 'cct.config.js') // relative
 };
 
 module.exports = defaultArgs;

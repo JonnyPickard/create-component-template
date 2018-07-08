@@ -3,7 +3,7 @@ const path = require('path');
 
 const getConfig = require('./importer');
 
-const { getAppRootDir } = require('../utils/helpers');
+const { getAppRootDir } = require('../utils/pathing');
 
 type templatePathsArray = Array<{
   filePath: string,

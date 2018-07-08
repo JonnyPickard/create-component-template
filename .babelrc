@@ -9,5 +9,5 @@
     ], "babel-preset-flow"],
   "plugins": ["babel-plugin-transform-object-rest-spread", ["transform-runtime", {
       "regenerator": true
-    }]]
+    }], "babel-plugin-transform-inline-environment-variables"]
 }

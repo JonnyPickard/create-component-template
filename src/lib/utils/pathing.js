@@ -1,9 +1,17 @@
+// @flow
 const findUp = require('find-up');
 const pkgDir = require('pkg-dir');
+const findParentDir = require('find-parent-dir-from-bin');
+
+const path = require('path');
+
+const absDirPath = path.dirname(process.argv[1]);
+const currentDirName = path.basename(absDirPath);
+const runningFromBin = currentDirName === '.bin';
 
 /**
  * gets the module root dir path
- * @return {string} rootDir path
+ * @return {string} moduleRootDir path
  */
 const getModuleRootDir = () =>
   findUp.sync('create-component-template', {
@@ -11,12 +19,19 @@ const getModuleRootDir = () =>
   });
 
 /**
- * gets the module root dir path
- * @return {string} rootDir path
+ * gets the app root dir path
+ * @return {string} appRootDir path
  */
-const getAppRootDir = () => pkgDir.sync(__dirname);
+const getAppRootDir = () => {
+  if (runningFromBin) {
+    return findParentDir(absDirPath);
+  }
+
+  // If not being run as a cli-tool
+  return pkgDir.sync(__dirname);
+};
 
 module.exports = {
-  getAppRootDir,
-  getModuleRootDir
+  getModuleRootDir,
+  getAppRootDir
 };

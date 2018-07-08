@@ -10,7 +10,7 @@
     "start": "babel-node src/create-component-template",
     "start-dist": "node ./dist/create-component-template",
     "nodemon-build": "nodemon -w ./src --exec npm run build",
-    "build": "babel ./src/ -d ./dist/ --all --pretty",
+    "build": "LIB_DIR_PARENT=dist babel ./src/ -d ./dist/ --all --pretty",
     "UTILS": "",
     "bump-patch-version": "babel-node scripts/bump-version",
     "NPM HOOKS": "",
@@ -19,8 +19,7 @@
   },
   "files": [
     "dist",
-    "templates",
-    "cct.config.default.js"
+    "templates"
   ],
   "dependencies": {
     "chalk": "2.4.1",
@@ -35,6 +34,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-eslint": "8.2.5",
+    "babel-plugin-transform-inline-environment-variables": "^0.4.3",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
     "babel-preset-env": "^1.7.0",

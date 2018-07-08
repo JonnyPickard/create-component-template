@@ -3,7 +3,7 @@ const path = require('path');
 
 const { logError, logInfo } = require('../utils/logger');
 const defaultArgs = require('../args/default.js');
-const { getModuleRootDir } = require('../utils/helpers');
+const { getModuleRootDir } = require('../utils/pathing');
 
 /*
   1 - check for specified config location
@@ -60,11 +60,14 @@ const getConfigFromProvidedConfigPath = (
   }
 };
 
+const getConfigFromRootDir = (appRootDir: string): ?Object => {
+  try {
+    return require(path.join(appRootDir, 'cct.config.js'));
+  } catch (err) {}
+};
+
 const getConfigFromPackageJson = (appRootDir: string): ?Object =>
   require(`${appRootDir}/package.json`)['cct.config'];
-
-const getConfigFromRootDir = (appRootDir: string): ?Object =>
-  require(path.join(appRootDir, 'cct.config.js'));
 
 const getConfigFromDefaultConfigPath = (
   moduleRootDir: string,

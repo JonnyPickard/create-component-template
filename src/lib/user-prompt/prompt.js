@@ -1,5 +1,4 @@
 // @flow
-
 const { logError } = require('../utils/logger.js');
 const inquirer = require('inquirer');
 const chalk = require('chalk');
