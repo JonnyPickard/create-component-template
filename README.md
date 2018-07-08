@@ -1,26 +1,27 @@
 # Create Component Template
 
-Creates components from templates. Usefull for component libraries (monorepos).
+Creates components from templates. Useful for component libraries (monorepos).
 
 Originally made to generate React components but can be used as a generic code generator.
 
-![Usage Gif](https://github.com/JonnyPickard/create-component-template/blob/master/docs/cct.gif)
 
 # Installation
 
-`npm i -D create-component-template`
+```sh
+npm i -D create-component-template
+```
 
 # Usage
 
 ## Template Directory
 
-First create a templates directory of you wish to structure your component.
+First, create a templates directory of you wish to structure your component.
 
 This can be placed anywhere in your directory and pointed to using the `cct.config` (see below).
 
 Example Template Directory:
 
-```
+```sh
 templates
 ├── component.template.js
 ├── fixture.template.js
@@ -33,7 +34,7 @@ Each file should be a function that takes a component name and returns an es6 te
 
 The component name should be injected with string interpolation where required. Like so:
 
-```
+```js
 module.exports = componentName => `\
 // @flow
 
@@ -76,14 +77,14 @@ The config file tells `create-component-template` where your templates are store
 `create-component-template` will look for the config file in the following places in this order:
 
 1. the location provided using the cli option `-c` or `--config` and *any* given filename
-2. inside of the `package.json` under `cct.config`
-3. in the root dir of the project under `cct.config`
+2. in the root dir of the project under `cct.config`
+3. inside of the `package.json` under `cct.config`
 
-Finally if none of these are found it will default to using the default templates.
+Finally, if none of these options can be found it will default to using default templates.
 
 A config file should be structured like so:
 
-```
+```js
 module.exports = {
   templatesDirectory: 'config/templates',
   templates: [
@@ -110,13 +111,13 @@ module.exports = {
     {
       fileName: 'index.js',
       templateName: 'component.template.js',
-      extension: '.jsx'
+      extension: '.js'
     }
   ]
 };
 ```
 
-- `templatesDirectory` - the path to your templates directory.
+- `templatesDirectory` - the relative path to your templates directory.
 - `templates` - an array of template config objects.
 
 - `extension` - should be the custom file extension you wish to provide.
@@ -124,13 +125,13 @@ module.exports = {
 - `fileName` - (optional) what to call the file, will default to user prompt provided name.
 - `folderName` - (optional) if you wish to place the file in a folder and what to call the folder.
 
-> Tip: Use Multiple config files that use the same templates directory on order to get diffent configurations.
+> TIP: Use multiple config files that use the same templates directory in order to get different configurations. You can also use Object.assign/ the spread operator to share the majority of config file contents.
 
 ## CLI Options
 
 > NOTE: Make sure to run using `create-component` e.g. `yarn create-component` or `node_modules/.bin/create-component` as this is whats specificed in the node_modules/.bin. `create-component-template` will not work.
 
-```
+```js
 create-component [command]
 
 Commands:
@@ -143,20 +144,9 @@ Options:
   --config, -c        Path to a config file
   --name, -n          Name of the component
   --path, -p          Path to create the component at
-  --dependencies, -d  If specified will enable dependencies prompt
   --help              Show help                                        [boolean]
 ```
 
-## Road Map / Contributing
+## Contributing
 
-This module should currently be considered an `Alpha` release. It is in working order (tested on Mac) but there are likely to be a few quirks. Use at your own risk.  
-
-If you find any issues or wish to make improvements please fork and PR!
-
-Planned changes (in order):
-
-1. Full testing (100% coverage).
-2. Full `flow` type support for type checking.
-3. Iron out configurations/ options and improve readme to better inform users of all possible options.
-4. Backwards compatability transpilation.
-5. Cross platform testing (Mac, Windows, Linux).
+See CONTRIBUTING.md

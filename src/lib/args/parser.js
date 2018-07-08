@@ -1,8 +1,5 @@
 // @flow
-
 const yargs = require('yargs');
-
-const { configPath, componentName, componentPath } = require('./default-args');
 
 const argv = yargs
   .command(
@@ -27,17 +24,10 @@ const argv = yargs
       describe: 'Path to create the component at'
     }
   })
-  .option({
-    dependencies: {
-      alias: 'd',
-      describe: 'If specified will enable dependencies prompt'
-    }
-  })
   .help().argv;
 
 module.exports = {
-  configPath: argv.config || argv.c || configPath,
-  componentName: argv.name || argv.n || componentName,
-  componentPath: argv.path || argv.p || componentPath,
-  dependenciesRequested: argv.dependencies || argv.d
+  configPath: argv.config || argv.c,
+  componentName: argv.name || argv.n,
+  componentPath: argv.path || argv.p
 };
