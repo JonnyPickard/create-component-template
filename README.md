@@ -4,8 +4,9 @@ Creates components from templates. Useful for component libraries (monorepos).
 
 Originally made to generate React components but can be used as a generic code generator.
 
-![Usage Gif](https://github.com/JonnyPickard/create-component-template/blob/master/cct.gif)
-
+<p align="center">
+  <img src="./cct.gif" alt="create-component-template example" style="width:90%;">
+</p>
 
 # Installation
 
