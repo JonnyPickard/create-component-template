@@ -66,9 +66,9 @@ export default ${componentName};
 `;
 ```
 
-For more examples look in the `/templates` directory.
+For more examples look in the `src/templates` directory.
 
-The `/templates` directory is used by default if no custom templates and custom config are provided.
+The `src/templates` directory is used by default if no custom templates and config are provided.
 
 ## Config File
 
@@ -129,9 +129,7 @@ module.exports = {
 
 ## CLI Options
 
-> NOTE: Make sure to run using `create-component` e.g. `yarn create-component` or `node_modules/.bin/create-component` as this is whats specificed in the node_modules/.bin. `create-component-template` will not work.
-
-```js
+```
 create-component [command]
 
 Commands:
@@ -145,6 +143,7 @@ Options:
   --name, -n          Name of the component
   --path, -p          Path to create the component at
   --help              Show help                                        [boolean]
+
 ```
 
 ## Contributing
