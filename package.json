@@ -11,8 +11,6 @@
     "start-dist": "node ./dist/create-component-template",
     "nodemon-build": "nodemon -w ./src --exec npm run build",
     "build": "LIB_DIR_PARENT=dist babel ./src/ -d ./dist/ --all --pretty",
-    "UTILS": "",
-    "bump-patch-version": "babel-node scripts/bump-version",
     "NPM HOOKS": "",
     "prepublishOnly": "npm run build",
     "postpublish": "rm -rf ./dist"
