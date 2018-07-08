@@ -1,5 +1,5 @@
 const defaultConfig = {
-  templatesDirectory: './templates',
+  templatesDirectory: './templates', // NOTE: Should point to App Route from where it's being run
   templates: [
     {
       folderName: '__fixtures__',

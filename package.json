@@ -1,6 +1,6 @@
 {
   "name": "create-component-template",
-  "version": "1.0.4-alpha-0.18",
+  "version": "1.0.4-alpha-0.20",
   "description": "Generates react components from templates",
   "bin": {
     "create-component": "dist/create-component-template.js"
@@ -11,8 +11,10 @@
     "start-dist": "node ./dist/create-component-template",
     "nodemon-build": "nodemon -w ./src --exec npm run build",
     "build": "babel ./src/ -d ./dist/ --all --pretty",
+    "UTILS": "",
+    "bump-patch-version": "babel-node scripts/bump-version",
     "NPM HOOKS": "",
-    "prepublishOnly": "npm run build",
+    "prepublishOnly": "npm run bump-patch-version && npm run build",
     "postpublish": "rm -rf ./dist"
   },
   "files": [

@@ -37,7 +37,7 @@ const { logInfo, logSuccess, logError } = require('./lib/utils/logger');
 
 const cliArgs = require('./lib/args/parser');
 const promptUser = require('./lib/user-prompt/prompt');
-const mapConfigWithTemplates = require('./lib/config/parser');
+const mapConfigWithTemplates = require('./lib/config/map-paths');
 
 const writeFile = util.promisify(fs.writeFile);
 
@@ -53,7 +53,7 @@ const writeFile = util.promisify(fs.writeFile);
     componentName = userResponse.componentName;
     componentPath = userResponse.componentPath;
 
-    const { folders, templates } = await mapConfigWithTemplates(
+    const { folderPaths, templatePaths } = await mapConfigWithTemplates(
       configPath,
       componentName,
       componentPath
@@ -61,10 +61,10 @@ const writeFile = util.promisify(fs.writeFile);
 
     logInfo(`Generating Component: ${componentName}`);
     // Make all directories
-    await Promise.all(folders.map(folderName => mkdirp(folderName)));
+    await Promise.all(folderPaths.map(folderName => mkdirp(folderName)));
     // Make all files
     await Promise.all(
-      templates.map(({ templatePath, filePath }) =>
+      templatePaths.map(({ templatePath, filePath }) =>
         writeFile(filePath, require(templatePath)(componentName))
       )
     );
@@ -73,9 +73,8 @@ const writeFile = util.promisify(fs.writeFile);
     logError(
       `Component ${componentName} could not be built! Please check the above error log.\n`
     );
-  } finally {
-    logSuccess(
-      `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
-    );
   }
+  logSuccess(
+    `Component ${componentName} was created succesfully! \nIt can be found at: '${componentPath}/${componentName}'.`
+  );
 })();

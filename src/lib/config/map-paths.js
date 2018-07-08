@@ -5,44 +5,56 @@ const getConfig = require('./importer');
 
 const { getAppRootDir } = require('../utils/helpers');
 
-const mapTemplates = (
+type templatePathsArray = Array<{
+  filePath: string,
+  templatePath: string
+}>;
+
+type folderPathsArray = Array<string>;
+
+/**
+ *
+ * @param  {Object} configFile
+ * @param  {string} appRootDir
+ * @param  {string} componentName
+ * @param  {string} componentPath
+ * @returns templatePathsArray
+ */
+const mapTemplatePaths = (
   configFile: Object,
-  rootDir: string,
+  appRootDir: string,
   componentName: string,
   componentPath: string
-): Array<{
-  [filePath: string]: string,
-  [templatePath: string]: string
-}> =>
+): templatePathsArray =>
   configFile.templates.map(template => {
     const folderName = template.folderName || '';
 
     return {
       filePath: path.join(
-        rootDir,
+        appRootDir,
         componentPath,
         componentName,
         folderName,
         template.fileName || componentName + template.extension
       ),
       templatePath: `${path.join(
-        rootDir,
+        appRootDir,
         configFile.templatesDirectory,
         template.templateName
       )}`
     };
   });
 
-const mapFolders = (
+const mapFolderPaths = (
   configFile: Object,
-  rootDir: string,
+  appRootDir: string,
   componentName: string,
   componentPath: string
-): Array<{ [folder_path: string]: string }> => {
+): folderPathsArray => {
   return configFile.templates
     .map(({ folderName }) => {
       if (folderName) {
-        return path.join(rootDir, componentPath, componentName, folderName);
+        return path.join(appRootDir, componentPath, componentName, folderName);
       }
     })
     .filter(folder => folder);
@@ -52,26 +64,29 @@ const mapConfigWithTemplates = async (
   configPath: string,
   componentName: string,
   componentPath: string
-): {
-  templates: Array<{
-    [filePath: string]: string,
-    [templatePath: string]: string
-  }>,
-  folders: Array<{ [folder_path: string]: string }>
-} => {
-  const rootDir = getAppRootDir();
-  const configFile = await getConfig(rootDir, configPath);
-  const folders = mapFolders(configFile, rootDir, componentName, componentPath);
-  const templates = mapTemplates(
+): Promise<{
+  templatePaths: templatePathsArray,
+  folderPaths: folderPathsArray
+}> => {
+  const appRootDir = getAppRootDir();
+  console.log(`appRootDir`, appRootDir);
+  const configFile = await getConfig(appRootDir, configPath);
+  const folderPaths = mapFolderPaths(
     configFile,
-    rootDir,
+    appRootDir,
+    componentName,
+    componentPath
+  );
+  const templatePaths = mapTemplatePaths(
+    configFile,
+    appRootDir,
     componentName,
     componentPath
   );
 
   return {
-    templates,
-    folders
+    templatePaths,
+    folderPaths
   };
 };
 
