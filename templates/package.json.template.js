@@ -1,4 +1,4 @@
-module.exports = (componentName, options) => `\
+module.exports = componentName => `\
 {
   "name": "${componentName} Component",
   "description": "Presentational",
