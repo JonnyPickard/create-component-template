@@ -15,9 +15,9 @@ npm i -D create-component-template
 
 ## Template Directory
 
-First, create a templates directory of you wish to structure your component.
+First, create a templates directory of the same structure as you wish to structure your component in.
 
-This can be placed anywhere in your directory and pointed to using the `cct.config` (see below).
+This can be placed anywhere within your app's directory and pointed to using the `cct.config` file (see below).
 
 Example Template Directory:
 
@@ -78,9 +78,9 @@ The config file tells `create-component-template` where your templates are store
 
 1. the location provided using the cli option `-c` or `--config` and *any* given filename
 2. in the root dir of the project under `cct.config`
-3. inside of the `package.json` under `cct.config`
+3. as part of the `package.json` file under `cct.config`
 
-Finally, if none of these options can be found it will default to using default templates.
+Finally, if none of these options are found it will default to using default templates.
 
 A config file should be structured like so:
 
@@ -120,10 +120,10 @@ module.exports = {
 - `templatesDirectory` - the relative path to your templates directory.
 - `templates` - an array of template config objects.
 
-- `extension` - should be the custom file extension you wish to provide.
+- `extension` - the custom file extension you wish to provide.
 - `templateName` - the name of the template file to use.
-- `fileName` - (optional) what to call the file, will default to user prompt provided name.
-- `folderName` - (optional) if you wish to place the file in a folder and what to call the folder.
+- `fileName` - (optional) what to call the file. otherwise use the user prompt provided name.
+- `folderName` - (optional) specify this if you wish to place the file inside a folder with said name.
 
 > TIP: Use multiple config files that use the same templates directory in order to get different configurations. You can also use Object.assign/ the spread operator to share the majority of config file contents.
 
