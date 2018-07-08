@@ -1,10 +1,9 @@
 # Create Component Template
 
-Creates components from templates. Usefull for component libraries (monorepos).
+Creates components from templates. Useful for component libraries (monorepos).
 
 Originally made to generate React components but can be used as a generic code generator.
 
-![Usage Gif](https://github.com/JonnyPickard/create-component-template/blob/master/docs/cct.gif)
 
 # Installation
 
@@ -16,7 +15,7 @@ npm i -D create-component-template
 
 ## Template Directory
 
-First create a templates directory of you wish to structure your component.
+First, create a templates directory of you wish to structure your component.
 
 This can be placed anywhere in your directory and pointed to using the `cct.config` (see below).
 
@@ -81,7 +80,7 @@ The config file tells `create-component-template` where your templates are store
 2. in the root dir of the project under `cct.config`
 3. inside of the `package.json` under `cct.config`
 
-Finally if none of these are found it will default to using the default templates.
+Finally, if none of these options can be found it will default to using default templates.
 
 A config file should be structured like so:
 
@@ -118,7 +117,7 @@ module.exports = {
 };
 ```
 
-- `templatesDirectory` - the path to your templates directory.
+- `templatesDirectory` - the relative path to your templates directory.
 - `templates` - an array of template config objects.
 
 - `extension` - should be the custom file extension you wish to provide.
@@ -126,7 +125,7 @@ module.exports = {
 - `fileName` - (optional) what to call the file, will default to user prompt provided name.
 - `folderName` - (optional) if you wish to place the file in a folder and what to call the folder.
 
-> Tip: Use Multiple config files that use the same templates directory on order to get diffent configurations.
+> TIP: Use multiple config files that use the same templates directory in order to get different configurations. You can also use Object.assign/ the spread operator to share the majority of config file contents.
 
 ## CLI Options
 
@@ -148,16 +147,6 @@ Options:
   --help              Show help                                        [boolean]
 ```
 
-## Road Map / Contributing
+## Contributing
 
-This module should currently be considered an `Alpha` release. It is in working order (tested on Mac) but there are likely to be a few quirks. Use at your own risk.  
-
-If you find any issues or wish to make improvements please fork and PR!
-
-Planned changes (in order):
-
-1. Full testing (100% coverage).
-2. Full `flow` type support for type checking.
-3. Iron out configurations/ options and improve readme to better inform users of all possible options.
-4. Backwards compatability transpilation.
-5. Cross platform testing (Mac, Windows, Linux).
+See CONTRIBUTING.md
