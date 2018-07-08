@@ -1,9 +1,10 @@
 [include]
-./src/
 
 [ignore]
 .*/__tests__/.*
+.*/dist/.*
 
 [options]
 module.ignore_non_literal_requires=true
 module.system=node
+

@@ -62,7 +62,7 @@ const getConfigFromProvidedConfigPath = (
   }
 };
 
-const getConfigFromPackageJson = (appRootDir: string) => {
+const getConfigFromPackageJson = (appRootDir: string): Object => {
   try {
     return require(`${appRootDir}/package.json`)['cct.config'];
   } catch (err) {
