@@ -4,7 +4,6 @@ const path = require('path');
 const importConfig = require('./importer');
 
 const { getAppRootDir } = require('../utils/pathing');
-const { logError } = require('../utils/logger');
 
 type templatePathsArray = Array<{
   filePath: string,
@@ -38,7 +37,7 @@ const mapTemplatePaths = (
         template.fileName || componentName + template.extension
       ),
       templatePath: `${path.join(
-        appRootDir,
+        path.isAbsolute(configFile.templatesDirectory) ? '' : appRootDir, // Only use a root dir if required
         configFile.templatesDirectory,
         template.templateName
       )}`
@@ -83,12 +82,6 @@ const mapConfigWithTemplates = async (
 }> => {
   const appRootDir = getAppRootDir();
   const configFile = await importConfig(appRootDir, configPath);
-
-  if (path.isAbsolute(configFile.templatesDirectory)) {
-    throw logError(
-      'cct.config[templatesDirectory] path was absolute. The provided path must be relative'
-    );
-  }
 
   const folderPaths = mapFolderPaths(
     configFile,

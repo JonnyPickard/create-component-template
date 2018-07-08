@@ -1,9 +1,15 @@
 // @flow
 const path = require('path');
+const { getModuleRootDir } = require('./lib/utils/pathing');
+
 const LIB_DIR_PARENT: string = process.env.LIB_DIR_PARENT || 'src';
 
 const defaultConfig = {
-  templatesDirectory: path.join(LIB_DIR_PARENT, './templates'),
+  templatesDirectory: path.join(
+    getModuleRootDir(),
+    LIB_DIR_PARENT,
+    './templates'
+  ),
   templates: [
     {
       folderName: '__fixtures__',
