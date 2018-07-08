@@ -11,7 +11,7 @@ const { getModuleRootDir } = require('../utils/pathing');
   3 - check package.json
   4 - get from default path
  */
-const getConfig = async (appRootDir: string, configPath: string): ?Object => {
+const importConfig = async (appRootDir: string, configPath: string): Object => {
   let config;
 
   try {
@@ -46,6 +46,7 @@ const getConfig = async (appRootDir: string, configPath: string): ?Object => {
   } catch (err) {
     logError(`${err}
       cct.config could not be loaded. please see the README for details on setting cct.config`);
+    throw err;
   }
 };
 
@@ -78,4 +79,4 @@ const getConfigFromDefaultConfigPath = (
   return require(path.join(moduleRootDir, configPath));
 };
 
-module.exports = getConfig;
+module.exports = importConfig;

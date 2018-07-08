@@ -1,5 +1,4 @@
 // @flow
-
 const yargs = require('yargs');
 
 const argv = yargs

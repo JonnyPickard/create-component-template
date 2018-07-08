@@ -1,13 +1,17 @@
 {
-  "presets": [[
+  "presets": [
+    [
       "babel-preset-env",
       {
         "targets": {
           "node": "8.0.0"
         }
       }
-    ], "babel-preset-flow"],
+    ], "babel-preset-flow"
+  ],
   "plugins": ["babel-plugin-transform-object-rest-spread", ["transform-runtime", {
       "regenerator": true
-    }], "babel-plugin-transform-inline-environment-variables"]
+    }],
+    "babel-plugin-transform-inline-environment-variables"
+  ]
 }

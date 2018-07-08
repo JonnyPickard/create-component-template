@@ -1,6 +1,6 @@
 {
   "name": "create-component-template",
-  "version": "1.0.4-alpha-0.27",
+  "version": "1.0.4-alpha-0.28",
   "description": "Generates react components from templates",
   "bin": {
     "create-component": "dist/create-component-template.js"

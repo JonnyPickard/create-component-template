@@ -1,7 +1,7 @@
 // @flow
 const path = require('path');
 
-const getConfig = require('./importer');
+const importConfig = require('./importer');
 
 const { getAppRootDir } = require('../utils/pathing');
 
@@ -13,7 +13,6 @@ type templatePathsArray = Array<{
 type folderPathsArray = Array<string>;
 
 /**
- *
  * @param  {Object} configFile
  * @param  {string} appRootDir
  * @param  {string} componentName
@@ -45,6 +44,13 @@ const mapTemplatePaths = (
     };
   });
 
+/**
+ * @param  {Object} configFile
+ * @param  {string} appRootDir
+ * @param  {string} componentName
+ * @param  {string} componentPath
+ * @returns folderPathsArray
+ */
 const mapFolderPaths = (
   configFile: Object,
   appRootDir: string,
@@ -60,6 +66,12 @@ const mapFolderPaths = (
     .filter(folder => folder);
 };
 
+/**
+ * @param  {string} configPath
+ * @param  {string} componentName
+ * @param  {string} componentPath
+ * @returns folderPathsArray
+ */
 const mapConfigWithTemplates = async (
   configPath: string,
   componentName: string,
@@ -69,7 +81,7 @@ const mapConfigWithTemplates = async (
   folderPaths: folderPathsArray
 }> => {
   const appRootDir = getAppRootDir();
-  const configFile = await getConfig(appRootDir, configPath);
+  const configFile = await importConfig(appRootDir, configPath);
   const folderPaths = mapFolderPaths(
     configFile,
     appRootDir,

@@ -4,6 +4,8 @@
 .*/__tests__/.*
 .*/dist/.*
 
+<PROJECT_ROOT>/node_modules/nixt/.*
+
 [options]
 module.ignore_non_literal_requires=true
 module.system=node

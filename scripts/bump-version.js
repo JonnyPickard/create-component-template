@@ -1,12 +1,10 @@
 /**
  * Current only bumps minor patch version but could be tweaked
  */
-
 const fs = require('fs');
-const { getModuleRootDir } = require('../src/lib/utils/pathing.js');
 const chalk = require('chalk');
 
-const moduleRootDir = getModuleRootDir();
+const moduleRootDir = '../';
 const packageJsonPath = `${moduleRootDir}/package.json`;
 
 const packageJson = require(`${moduleRootDir}/package.json`);

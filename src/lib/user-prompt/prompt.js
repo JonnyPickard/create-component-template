@@ -5,7 +5,11 @@ const chalk = require('chalk');
 
 const defaultArgs = require('../args/default');
 
-const createQuestions = options => {
+/**
+ * @param  {Object} options
+ * @returns Array
+ */
+const createQuestions = (options: Object): Array<Object> => {
   const questions = [
     {
       type: 'input',
@@ -29,6 +33,10 @@ const createQuestions = options => {
   return questions;
 };
 
+/**
+ * @param  {Object} options
+ * @returns Object
+ */
 const promptUser = async (options: Object): Object => {
   const questions = createQuestions(options);
 
