@@ -18,8 +18,7 @@
     "postpublish": "rm -rf ./dist"
   },
   "files": [
-    "dist",
-    "templates"
+    "dist"
   ],
   "dependencies": {
     "chalk": "2.4.1",
